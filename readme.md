@@ -58,7 +58,7 @@ BUSI_Segmentation/
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/BUSI_Segmentation.git
+git clone https://github.com/danielakbank/BUSI_Segmentation.git
 cd BUSI_Segmentation
 ```
 
@@ -126,7 +126,7 @@ This project is open-source under the **MIT License**. See `LICENSE` for details
 
 ## 🙏 Acknowledgements
 
-- [BUSI Dataset](https://www.kaggle.com/datasets/navoneel/breast-ultrasound-images-dataset)  
+- [BUSI Dataset](https://www.kaggle.com/datasets/sabahesaraki/breast-ultrasound-images-dataset)  
 - TensorFlow and Keras libraries  
 - Gradio for interactive web interface  
 - Albumentations for data augmentation  

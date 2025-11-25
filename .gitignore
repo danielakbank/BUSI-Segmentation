@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Python cache / temp files
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# macOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+Desktop.ini
+
+# TensorFlow / Keras models (optional, if large)
+*.h5
+*.keras
+*.ckpt
+
+# PyCharm / VSCode settings
+.idea/
+.vscode/
+
+# Gradio temporary cache (if any)
+.gradio/
+
+# Dataset / large files (optional, keep out of Git if too big)
+Dataset_BUSI_with_GT/
+validation_images/
+models/
+
+# Optional: environment config
+*.env

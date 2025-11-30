@@ -1,0 +1,6 @@
+tensorflow
+keras
+gradio
+numpy
+opencv-python
+albumentations

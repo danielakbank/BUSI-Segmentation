@@ -4,7 +4,7 @@
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.14-orange)](https://www.tensorflow.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-[Live Demo (Gradio)](https://07b36d26bf766e59bf.gradio.live)
+[Live Demo (Gradio)](https://66b59c5278cda4dc04.gradio.live)
 
 ---
 

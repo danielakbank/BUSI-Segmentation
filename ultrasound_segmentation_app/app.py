@@ -1,23 +1,8 @@
 import gradio as gr
 import tensorflow as tf
-from tensorflow.keras import backend as K
 from PIL import Image
 from utils import preprocess_image, postprocess_mask, overlay_mask
-
-# ------------------------------
-# CUSTOM METRIC & LOSS
-# ------------------------------
-@tf.keras.utils.register_keras_serializable()
-def dice_coef(y_true, y_pred, smooth=1e-6):
-    y_true_f = K.flatten(y_true)
-    y_pred_f = K.flatten(y_pred)
-    intersection = K.sum(y_true_f * y_pred_f)
-    return (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
-
-@tf.keras.utils.register_keras_serializable()
-def combined_loss(y_true, y_pred):
-    bce = tf.keras.losses.BinaryCrossentropy()(y_true, y_pred)
-    return bce + (1 - dice_coef(y_true, y_pred))
+from custom_objects import combined_loss, dice_coef
 
 # ------------------------------
 # LOAD MODEL
@@ -71,4 +56,4 @@ app = gr.Interface(
 # RUN APP
 # ------------------------------
 if __name__ == "__main__":
-    app.launch(server_name="0.0.0.0", server_port=7860, share=True)
+    app.launch(server_name="0.0.0.0", server_port=7860)

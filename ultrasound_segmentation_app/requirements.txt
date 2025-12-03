@@ -4,3 +4,4 @@ gradio
 numpy
 opencv-python
 albumentations
+Pillow

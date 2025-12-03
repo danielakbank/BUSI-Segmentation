@@ -1,7 +1,9 @@
 import tensorflow as tf
 from tensorflow.keras import backend as K
 
-# Dice coefficient
+# ------------------------------
+# DICE COEFFICIENT
+# ------------------------------
 @tf.keras.utils.register_keras_serializable()
 def dice_coef(y_true, y_pred, smooth=1e-6):
     y_true_f = K.flatten(y_true)
@@ -9,7 +11,9 @@ def dice_coef(y_true, y_pred, smooth=1e-6):
     intersection = K.sum(y_true_f * y_pred_f)
     return (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
 
-# Combined loss
+# ------------------------------
+# COMBINED LOSS
+# ------------------------------
 @tf.keras.utils.register_keras_serializable()
 def combined_loss(y_true, y_pred):
     bce = tf.keras.losses.BinaryCrossentropy()(y_true, y_pred)

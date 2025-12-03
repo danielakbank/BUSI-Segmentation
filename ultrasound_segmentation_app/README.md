@@ -1,3 +1,9 @@
+---
+title: ultrasound_segmentation_app
+app_file: app.py
+sdk: gradio
+sdk_version: 6.0.1
+---
 # 🩺 Breast Ultrasound Segmentation App
 
 [![Python](https://img.shields.io/badge/python-3.10-blue)](https://www.python.org/)

@@ -4,7 +4,7 @@
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.14-orange)](https://www.tensorflow.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-[Live Demo (Gradio)](https://5c4afb83d440eb8867.gradio.live)
+[Live Demo (Gradio)](https://huggingface.co/spaces/daniel-akbank/ultrasound-segmentation)
 
 ---
 

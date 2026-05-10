@@ -1,135 +1,127 @@
-# 🩺 Breast Ultrasound Segmentation App
+# 🩺 BUSI Breast Ultrasound Image Segmentation
 
-[![Python](https://img.shields.io/badge/python-3.10-blue)](https://www.python.org/)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.14-orange)](https://www.tensorflow.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+## 🧠 Overview
 
-[Live Demo (Gradio)](https://huggingface.co/spaces/daniel-akbank/ultrasound-segmentation)
+This project focuses on **medical image segmentation** for breast ultrasound scans using deep learning.
 
----
-
-## 🚀 Project Overview
-This project implements **breast ultrasound image segmentation** using a **U-Net model with a ResNet50V2 backbone**. The goal is to detect and segment lesions in ultrasound images with high accuracy.  
-
-Key features:  
-- U-Net architecture with ResNet50V2 encoder  
-- Dice coefficient and combined loss (BCE + Focal Tversky)  
-- Data augmentation for better generalization  
-- Interactive **Gradio app** for testing and visualization  
+The goal is to automatically detect and segment lesion regions (benign, malignant, normal) from ultrasound images using a convolutional neural network.
 
 ---
 
-## 📁 Folder Structure
+## 🌐 Live Demo
 
-```
-BUSI_Segmentation/
-│
-├── README.md                          # This file
-├── breast_segmentation_unet_resnet50v2.ipynb  # Training & evaluation notebook
-├── Dataset_BUSI_with_GT/              # Ultrasound dataset (images + masks)
-├── models/
-│   └── unet_resnet50v2_final.keras    # Trained model
-├── validation_images/                 # Preprocessed validation images
-├── ultrasound_segmentation_app/       # Gradio app folder
-│   ├── app.py
-│   ├── utils.py
-│   ├── custom_object.py
-│   ├── unet_resnet50v2_final.keras
-│   └── requirements.txt
-└── venv/                               # Optional virtual environment (ignored in Git)
-```
+🚀 Try the deployed app here:  
+https://huggingface.co/spaces/daniel-akbank/ultrasound-segmentation
 
 ---
 
-## ⚡ Features
+## 📁 Repository
 
-- Train U-Net on BUSI dataset with augmented data  
-- Stratified train/validation split and oversampling to balance classes  
-- Evaluate model using Dice coefficient and visualize results  
-- **Gradio app** for easy image upload and segmentation visualization:  
-  - Upload an ultrasound image  
-  - Output segmentation mask  
-  - Overlay mask on original image  
+GitHub Repo:  
+https://github.com/danielakbank/BUSI-Segmentation
 
 ---
 
-## 🛠 Installation
+## 📊 Dataset
 
-1. Clone the repository:
+**BUSI (Breast Ultrasound Images Dataset)**
 
-```bash
-git clone https://github.com/danielakbank/BUSI_Segmentation.git
-cd BUSI_Segmentation
-```
-
-2. Create a virtual environment:
-
-```bash
-python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
-```
-
-3. Install dependencies:
-
-```bash
-pip install -r ultrasound_segmentation_app/requirements.txt
-```
+- Benign cases  
+- Malignant cases  
+- Normal cases  
+- Each image has a corresponding segmentation mask  
 
 ---
 
-## ▶️ Running the Gradio App
+## 🧠 Model Architecture
 
-1. Navigate to the app folder:
+The model uses a **U-Net style architecture** with a pretrained encoder:
 
-```bash
-cd ultrasound_segmentation_app
-```
-
-2. Launch the Gradio interface:
-
-```bash
-python app.py
-```
-
-3. Open the displayed URL in your browser to test segmentation.
+- Encoder: :contentReference[oaicite:0]{index=0}  
+- Decoder: U-Net upsampling path with skip connections  
+- Input size: 256 × 256 × 3  
+- Output: binary segmentation mask (256 × 256 × 1)
 
 ---
 
-## 📊 Training & Evaluation
+## ⚙️ Training Pipeline
 
-- Notebook: `breast_segmentation_unet_resnet50v2.ipynb`  
-- Includes:  
-  - Data loading and preprocessing  
-  - U-Net model with ResNet50V2 backbone  
-  - Training (encoder freeze + fine-tuning)  
-  - Evaluation on validation images  
-  - Visualizations of predicted masks vs ground truth  
+### 1. Data Preparation
+- Image-mask pairing from BUSI dataset
+- Resize to 256×256
+- Normalization to [0,1]
+- Binary mask conversion
 
-- Model saved as: `models/unet_resnet50v2_final.keras`
+### 2. Data Splitting
+- Stratified train/validation split
+- Class balancing via oversampling
 
----
+### 3. Data Augmentation
+- Horizontal & vertical flips  
+- Rotation  
+- Brightness/contrast adjustment  
+- Elastic deformation  
 
-## 📌 Notes
-
-- The dataset folder `Dataset_BUSI_with_GT/` should contain all BUSI images and masks.  
-- Validation images are stored in `validation_images/` for quick testing.  
-- If the dataset or model is too large, consider hosting externally and linking in the README.  
-
----
-
-## 📜 License
-
-This project is open-source under the **MIT License**. See `LICENSE` for details.
+### 4. Training Strategy
+- Phase 1: Encoder frozen, decoder training
+- Phase 2: Full model fine-tuning (low learning rate)
 
 ---
 
-## 🙏 Acknowledgements
+## 📈 Evaluation Metrics
 
-- [BUSI Dataset](https://www.kaggle.com/datasets/sabahesaraki/breast-ultrasound-images-dataset)  
-- TensorFlow and Keras libraries  
-- Gradio for interactive web interface  
-- Albumentations for data augmentation  
+- Dice Coefficient (primary metric)
+- Focal Tversky Loss
+- Binary Cross-Entropy
+- SSIM (Structural Similarity Index)
+- PSNR (Peak Signal-to-Noise Ratio)
 
-```
+---
 
+## 📊 Results
+
+- Final Validation Dice Score: ~0.71  
+- Stable convergence across training phases  
+- Strong segmentation performance on validation data  
+
+---
+
+## 🧪 Notebook Contents
+
+The Jupyter notebook includes:
+
+- Dataset loading & preprocessing  
+- Exploratory data analysis  
+- Data augmentation pipeline  
+- U-Net model implementation  
+- Training (Phase 1 + Phase 2)  
+- Evaluation & visualization  
+- Prediction overlays  
+
+---
+
+## 🛠 Tech Stack
+
+- Python  
+- TensorFlow / Keras  
+- NumPy  
+- Matplotlib  
+- Albumentations  
+- Gradio  
+- Hugging Face Spaces  
+
+---
+
+## ⚠️ Disclaimer
+
+This project is intended for **research and educational purposes only**.
+
+It is **not a medical device** and should not be used for clinical diagnosis or treatment decisions.
+
+Always consult qualified medical professionals for healthcare decisions.
+
+---
+
+## 👨‍💻 Author
+
+Developed as a deep learning project for medical image segmentation using convolutional neural networks.
